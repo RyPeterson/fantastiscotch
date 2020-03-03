@@ -5,10 +5,9 @@ import { fgDarkest } from "../constants/colorTheme";
 import Button from "./Button";
 
 export interface MeterOption {
-  id: string;
+  id: string | number;
   fillColor: string;
   name?: string;
-  onClick?(id: string): void;
 }
 
 export enum FillMode {
@@ -61,7 +60,7 @@ const Meter: FC<Props> = ({
 
   return (
     <Root {...rest}>
-      {options.map((option, idx) => (
+      {options.map(option => (
         <ColorButton key={option.id} onClick={e => handleClick(e, option)}>
           <ColorContainer
             selected={isSelected(option)}
@@ -91,6 +90,13 @@ const ColorContainer = styled(Row)<{ color: string; selected: boolean }>`
     css`
       background-color: ${props.color};
     `}
+
+  &:hover {
+    opacity: 0.7;
+    ${props => css`
+      background-color: ${props.color};
+    `}
+  }
 `;
 
 const ColorName = styled(Row)`
@@ -101,4 +107,5 @@ const ColorName = styled(Row)`
 const ColorButton = styled(Button)`
   flex-direction: column;
   align-items: center;
+  width: 100%;
 `;
