@@ -14,7 +14,7 @@ const colorOptions: MeterOption[] = scotchColors.map(color => ({
 }));
 
 interface Props {
-  selected?: ScotchColor;
+  selected?: ScotchColor | null;
   onClick?(color: ScotchColor): void;
 }
 
