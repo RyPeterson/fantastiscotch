@@ -6,28 +6,84 @@ const colors: ScotchColor[] = [
     color: "#FFFFFF"
   },
   {
-    name: "Straw",
-    color: "#E4D96F"
+    name: "White Wine",
+    color: "#fcfcdb"
   },
   {
-    name: "Honey",
-    color: "#EBAF4C"
+    name: "Straw",
+    color: "#feed8f"
+  },
+  {
+    name: "Pale Gold",
+    color: "#fae971"
+  },
+  {
+    name: "Corn",
+    color: "#fbde62"
+  },
+  {
+    name: "Yellow-Gold",
+    color: "#f9d754"
   },
   {
     name: "Gold",
-    color: "#FFD700"
+    color: "#fad249"
   },
   {
     name: "Amber",
-    color: "#FFBF00"
+    color: "#f7c94a"
   },
   {
-    name: "Caramel",
-    color: "#85461E"
+    name: "Dark Gold",
+    color: "#f3c34c"
+  },
+  {
+    name: "Amontillado Sherry",
+    color: "#f5ba3e"
+  },
+  {
+    name: "Deep Copper",
+    color: "#f2b638"
+  },
+  {
+    name: "Burnished",
+    color: "#e6a421"
+  },
+  {
+    name: "Chestnutploroso Sherry",
+    color: "#e39422"
+  },
+  {
+    name: "Russet",
+    color: "#e18a1a"
+  },
+  {
+    name: "Tawny",
+    color: "#d5661d"
+  },
+  {
+    name: "Auburn",
+    color: "#d95a27"
   },
   {
     name: "Mahogany",
-    color: "#420D09"
+    color: "#c4442b"
+  },
+  {
+    name: "Burnt Umber",
+    color: "#a52724"
+  },
+  {
+    name: "Old Oak",
+    color: "#931e1b"
+  },
+  {
+    name: "Brown Sherry",
+    color: "#93271c"
+  },
+  {
+    name: "Treacle",
+    color: "#64271c"
   }
 ];
 

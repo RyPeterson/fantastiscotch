@@ -61,13 +61,15 @@ const Meter: FC<Props> = ({
   return (
     <Root {...rest}>
       {options.map(option => (
-        <ColorButton key={option.id} onClick={e => handleClick(e, option)}>
+        <MeterButton key={option.id} onClick={e => handleClick(e, option)}>
           <ColorContainer
             selected={isSelected(option)}
             color={option.fillColor}
-          />
-          {option.name && <ColorName>{option.name}</ColorName>}
-        </ColorButton>
+          >
+            &nbsp;
+          </ColorContainer>
+          {option.name && <MeterValueName>{option.name}</MeterValueName>}
+        </MeterButton>
       ))}
     </Root>
   );
@@ -77,35 +79,44 @@ export default Meter;
 
 const Root = styled(Row)`
   width: 100%;
+  height: 100%;
   justify-content: space-between;
+  align-items: baseline;
   padding: 0 1rem;
 `;
 
-const ColorContainer = styled(Row)<{ color: string; selected: boolean }>`
+export const ColorContainer = styled(Row)<{ color: string; selected: boolean }>`
+  height: 100%;
   width: 100%;
-  height: 20px;
+  max-width: 100%;
   border: 1px solid black;
   ${props =>
     props.selected &&
     css`
       background-color: ${props.color};
+      box-shadow: 0 0 10px #9ecaed;
     `}
 
   &:hover {
     opacity: 0.7;
+    box-shadow: 0 0 10px #9ecaed;
     ${props => css`
       background-color: ${props.color};
     `}
   }
 `;
 
-const ColorName = styled(Row)`
+export const MeterValueName = styled(Row)`
   ${fgDarkest}
   font-size: 1.125rem;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  flex: 1 0 auto;
 `;
 
-const ColorButton = styled(Button)`
+export const MeterButton = styled(Button)`
   flex-direction: column;
-  align-items: center;
   width: 100%;
+  height: 100%;
 `;
