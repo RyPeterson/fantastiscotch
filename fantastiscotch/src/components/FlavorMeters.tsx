@@ -1,5 +1,5 @@
 import React, { FC, useCallback } from "react";
-import styled from "styled-components/macro";
+import styled, { css } from "styled-components/macro";
 import Column from "./Column";
 import MeterLabel from "./MeterLabel";
 import Row from "./Row";
@@ -47,16 +47,19 @@ const FlavorMeters: FC<Props> = ({ onSelected, selected, ...rest }) => {
           options={leftColumn}
           onSelected={onSelected}
           selected={selected}
+          order={1}
         />
         <MeterGroup
           options={rightColumn}
           onSelected={onSelected}
           selected={selected}
+          order={2}
         />
         <MeterGroup
           options={middleColumn}
           onSelected={onSelected}
           selected={selected}
+          order={3}
         />
       </Meters>
     </Root>
@@ -76,29 +79,44 @@ const Root = styled(Column)`
 const Meters = styled(Row)`
   width: 100%;
   height: 100%;
+  @media screen and (max-width: 990px) {
+    flex-direction: column;
+  }
 `;
 
 const MeterColumn = styled(Column)`
-  flex: 1 1 0;
+  flex: 1 0 auto;
+  @media screen and (max-width: 990px) {
+      ${NumberMeter} + ${NumberMeter} {
+        margin-top: 0.625rem;
+      }
+      margin-top: 0.625rem;
+  }
 `;
 
-const MeterHeadingRoot = styled(Row)`
+const MeterHeadingRoot = styled(Row)<{ order: number }>`
   width: 100%;
   justify-content: space-between;
   padding: 0 1rem;
   font-size: 1.125rem;
   font-weight: bold;
-
   > :first-child {
     width: 135px;
     text-align: right;
   }
+  @media screen and (max-width: 990px) {
+    ${props =>
+      props.order > 1 &&
+      css`
+        display: none;
+      `}
+  }
 `;
 
-const MeterHeading: FC = props => (
-  <MeterHeadingRoot>
+const MeterHeading: FC<{ order: number }> = props => (
+  <MeterHeadingRoot {...props}>
     <div>Little</div>
-    <div>Alot</div>
+    <div>A Lot</div>
   </MeterHeadingRoot>
 );
 
@@ -106,6 +124,7 @@ interface MeterGroupProps {
   options: ReadonlyArray<FlavorNames>;
   selected?: ReadonlyArray<SelectedFlavorAndNumber>;
   onSelected?(option: FlavorNames, value: number): void;
+  order: number;
 }
 
 function getSelectedOption(
@@ -122,7 +141,12 @@ function getSelectedOption(
   return undefined;
 }
 
-const MeterGroup: FC<MeterGroupProps> = ({ options, selected, onSelected }) => {
+const MeterGroup: FC<MeterGroupProps> = ({
+  options,
+  selected,
+  onSelected,
+  order
+}) => {
   const handleSelected = useCallback(
     (option: FlavorNames, value: number) => {
       if (onSelected) {
@@ -134,7 +158,7 @@ const MeterGroup: FC<MeterGroupProps> = ({ options, selected, onSelected }) => {
 
   return (
     <MeterColumn>
-      <MeterHeading />
+      <MeterHeading order={order} />
       {options.map(option => (
         <NumberMeter
           key={option}

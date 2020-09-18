@@ -2,7 +2,12 @@ import React, { FC, useCallback, useMemo } from "react";
 import Row from "./Row";
 import styled from "styled-components/macro";
 import MeterLabel from "./MeterLabel";
-import Meter, { FillMode, MeterOption } from "./Meter";
+import Meter, {
+  ColorContainer,
+  FillMode,
+  MeterButton,
+  MeterOption
+} from "./Meter";
 
 const options: MeterOption[] = [
   {
@@ -66,4 +71,11 @@ const Root = styled(Row)`
 const StyledMeter = styled(Meter).attrs({
   fillMode: FillMode.fillPrevious,
   options
-})``;
+})`
+  ${MeterButton} {
+    flex-direction: row;
+    ${ColorContainer} {
+      flex-shrink: 0;
+    }
+  }
+`;
