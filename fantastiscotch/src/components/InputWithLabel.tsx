@@ -29,4 +29,5 @@ const Root = styled(Row)`
 const Label = styled.label`
   font-weight: bold;
   font-size: 1rem;
+  margin-right: 0.5rem;
 `;
