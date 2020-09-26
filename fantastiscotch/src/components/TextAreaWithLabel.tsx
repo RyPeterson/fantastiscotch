@@ -1,5 +1,6 @@
 import React, { ComponentPropsWithoutRef, FC } from "react";
 import styled from "styled-components";
+import Label from "./Label";
 import Row from "./Row";
 import TextArea from "./TextArea";
 
@@ -22,10 +23,8 @@ const TextAreaWithLabel: FC<TextAreaWithLabelProps> = ({
 
 export default styled(TextAreaWithLabel)``;
 
-const Root = styled(Row)``;
-
-const Label = styled.label`
-  font-weight: bold;
-  font-size: 1rem;
-  margin: 2px 0.5rem 0 0;
+const Root = styled(Row)`
+  ${Label} {
+    margin: 2px 0.5rem 0 0;
+  }
 `;

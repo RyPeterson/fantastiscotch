@@ -1,11 +1,9 @@
 import { useState, useCallback, useEffect } from "react";
-import { SelectedFlavorAndNumber } from "../components/FlavorMeters";
 import FlavorNames from "../types/FlavorNames";
+import { FlavorRating } from "../types/FlavorRating";
 
-export default function useFlavorMeters(
-  existing?: SelectedFlavorAndNumber[] | null
-) {
-  const [selected, setSelected] = useState<SelectedFlavorAndNumber[]>([]);
+export default function useFlavorMeters(existing?: FlavorRating[] | null) {
+  const [selected, setSelected] = useState<FlavorRating[]>([]);
 
   useEffect(() => {
     setSelected(existing || []);

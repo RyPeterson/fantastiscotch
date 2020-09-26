@@ -4,8 +4,7 @@ import Row from "./Row";
 import Button from "./Button";
 import { star, starFilled } from "../icons";
 import noop from "../utils/noop";
-
-export type RatingValue = 0 | 1 | 2 | 3 | 4 | 5;
+import { RatingValue } from "../types/RatingValue";
 
 const values = [1, 2, 3, 4, 5];
 

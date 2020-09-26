@@ -9,9 +9,9 @@ export interface CheckBoxItem {
   label: string;
 }
 
-interface CheckBoxGroupProps {
+export interface CheckBoxGroupProps {
   items: ReadonlyArray<CheckBoxItem>;
-  selected?: CheckBoxItem;
+  selected?: CheckBoxItem | null;
   onClick?(item: CheckBoxItem): void;
 }
 

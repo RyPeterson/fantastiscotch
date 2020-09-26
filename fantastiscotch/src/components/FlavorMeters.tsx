@@ -5,6 +5,7 @@ import MeterLabel from "./MeterLabel";
 import Row from "./Row";
 import FlavorNames from "../types/FlavorNames";
 import NumberMeter from "./NumberMeter";
+import { FlavorRating } from "../types/FlavorRating";
 
 const leftColumn = [
   FlavorNames.finish,
@@ -28,13 +29,8 @@ const rightColumn = [
   FlavorNames.darkFruit
 ];
 
-export interface SelectedFlavorAndNumber {
-  id: FlavorNames;
-  value: number;
-}
-
 interface Props {
-  selected: ReadonlyArray<SelectedFlavorAndNumber>;
+  selected: ReadonlyArray<FlavorRating>;
   onSelected?(option: FlavorNames, value: number): void;
 }
 
@@ -122,14 +118,14 @@ const MeterHeading: FC<{ order: number }> = props => (
 
 interface MeterGroupProps {
   options: ReadonlyArray<FlavorNames>;
-  selected?: ReadonlyArray<SelectedFlavorAndNumber>;
+  selected?: ReadonlyArray<FlavorRating>;
   onSelected?(option: FlavorNames, value: number): void;
   order: number;
 }
 
 function getSelectedOption(
   option: FlavorNames,
-  selected?: ReadonlyArray<SelectedFlavorAndNumber>
+  selected?: ReadonlyArray<FlavorRating>
 ) {
   if (selected) {
     const selectedById = selected.find(opt => opt.id === option);
