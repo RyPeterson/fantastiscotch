@@ -1,15 +1,15 @@
-import React, { ComponentPropsWithoutRef, FC } from "react";
 import styled from "styled-components/macro";
 import Row from "./Row";
-import Input from "./Input";
 import Label from "./Label";
+import React, { FC } from "react";
+import NumberInput, { NumberInputProps } from "./NumberInput";
 
-interface InputWithLabelProps extends ComponentPropsWithoutRef<"input"> {
+interface NumberInputWithLabelProps extends NumberInputProps {
   id: string;
   label: string;
 }
 
-const InputWithLabel: FC<InputWithLabelProps> = ({
+const NumberInputWithLabel: FC<NumberInputWithLabelProps> = ({
   id,
   label,
   className,
@@ -17,11 +17,11 @@ const InputWithLabel: FC<InputWithLabelProps> = ({
 }) => (
   <Root className={className}>
     <Label htmlFor={id}>{label}:</Label>
-    <Input id={id} {...rest} />
+    <NumberInput id={id} {...rest} />
   </Root>
 );
 
-export default styled(InputWithLabel)``;
+export default styled(NumberInputWithLabel)``;
 
 const Root = styled(Row)`
   align-items: center;

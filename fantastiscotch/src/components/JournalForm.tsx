@@ -12,17 +12,27 @@ import ColorMeter from "./ColorMeter";
 import FlavorMeters from "./FlavorMeters";
 import YesNoCheckboxes from "./YesNoCheckboxes";
 import Label from "./Label";
-import getFlavorRatings from "../utils/getFlavorRatings";
+import { getFlavorRatings } from "../utils/flavorRatingHelper";
+import eventTargetValue from "../utils/eventTargetValue";
+import NumberInputWithLabel from "./NumberInputWithLabel";
 
 const JournalForm: FC<JournalFormProps> = ({
   distiller,
+  onDistillerChanged,
   origin,
+  onOriginChanged,
   age,
+  onAgeChanged,
   price,
+  onPriceChanged,
   date,
+  onDateChanged,
   rating,
+  onRatingChanged,
   notes,
+  onNotesChanged,
   color,
+  onColorChanged,
   finishRating,
   acidicRating,
   smokeRating,
@@ -38,10 +48,15 @@ const JournalForm: FC<JournalFormProps> = ({
   toffeeRating,
   spicyRating,
   darkFruitRating,
+  onFlavorRatingChanged,
   proof,
+  onProofChanged,
   tryAgain,
+  onTryAgainChanged,
   reasonToNot,
+  onReasonToNotChanged,
   sampledFrom,
+  onSampleFromChanged,
   ...rest
 }) => {
   const handleSubmit = useCallback((event: FormEvent) => {
@@ -51,35 +66,63 @@ const JournalForm: FC<JournalFormProps> = ({
   return (
     <FormRoot onSubmit={handleSubmit} {...rest}>
       <FormRow>
-        <InputWithLabel id="distiller" label="Distiller" value={distiller} />
-        <InputWithLabel id="origin" label="Origin" value={origin} />
         <InputWithLabel
-          type="number"
+          id="distiller"
+          label="Distiller"
+          value={distiller}
+          onChange={eventTargetValue(onDistillerChanged)}
+        />
+        <InputWithLabel
+          id="origin"
+          label="Origin"
+          value={origin}
+          onChange={eventTargetValue(onOriginChanged)}
+        />
+        <NumberInputWithLabel
           id="age"
           label="Age"
-          value={age === null ? "" : age}
+          value={age}
+          onChange={onAgeChanged}
+        />
+        <NumberInputWithLabel
+          id="price"
+          label="Price"
+          value={price}
+          onChange={onPriceChanged}
         />
       </FormRow>
 
       <FormRow>
         <FormColumn>
           <FormRow>
-            <InputWithLabel id="date" label="Date" value={date} />
-            <Rating selected={rating} />
+            <InputWithLabel
+              id="date"
+              label="Date"
+              value={date}
+              onChange={eventTargetValue(onDateChanged)}
+              type="date"
+            />
+            <Rating selected={rating} onClick={onRatingChanged} />
           </FormRow>
           <SampleFromRow>
             <Label>Sampled From:</Label>
             <SampledFromCheckboxes
               selected={sampledFromItems.find(item => item.id === sampledFrom)}
+              onClick={onSampleFromChanged}
             />
           </SampleFromRow>
         </FormColumn>
         <FormColumn>
-          <Notes id="notes" label="Notes" value={notes} />
+          <Notes
+            id="notes"
+            label="Notes"
+            value={notes}
+            onChange={eventTargetValue(onNotesChanged)}
+          />
         </FormColumn>
       </FormRow>
       <ColorMeterContainer>
-        <StyledColorMeter selected={color} />
+        <StyledColorMeter selected={color} onClick={onColorChanged} />
       </ColorMeterContainer>
       <FlavorMeters
         selected={getFlavorRatings({
@@ -99,19 +142,25 @@ const JournalForm: FC<JournalFormProps> = ({
           spicyRating,
           darkFruitRating
         })}
+        onSelected={onFlavorRatingChanged}
       />
       <FinalThoughtRow>
-        <InputWithLabel
-          type="number"
+        <NumberInputWithLabel
           id="proof"
           label="Heat/Proof"
-          value={proof === null ? "" : proof}
+          value={proof}
+          onChange={onProofChanged}
         />
         <YesNoContainer>
           <Label>Would Try Again?</Label>
-          <YesNoCheckboxes value={tryAgain} />
+          <YesNoCheckboxes value={tryAgain} onClick={onTryAgainChanged} />
           <NoReason hide={tryAgain !== false}>
-            <InputWithLabel id="why" label="Why?" value={reasonToNot} />
+            <InputWithLabel
+              id="why"
+              label="Why?"
+              value={reasonToNot}
+              onChange={eventTargetValue(onReasonToNotChanged)}
+            />
           </NoReason>
         </YesNoContainer>
       </FinalThoughtRow>

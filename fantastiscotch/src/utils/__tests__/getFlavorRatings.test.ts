@@ -1,10 +1,10 @@
-import getFlavorRatings from "../getFlavorRatings";
+import flavorRatingHelper from "../flavorRatingHelper";
 import FlavorNames from "../../types/FlavorNames";
 
-describe("getFlavorRatings tests", () => {
+describe("flavorRatingHelper tests", () => {
   test("All values mapped", () => {
     expect(
-      getFlavorRatings({
+      flavorRatingHelper({
         saltyRating: 1,
         smokeRating: 1,
         spicyRating: 1,
@@ -26,7 +26,7 @@ describe("getFlavorRatings tests", () => {
 
   test("Only returns values that are non-null", () => {
     expect(
-      getFlavorRatings({
+      flavorRatingHelper({
         saltyRating: null,
         smokeRating: 1,
         spicyRating: null,

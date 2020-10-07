@@ -22,14 +22,17 @@ function getSelectedItem(value?: boolean | null): CheckBoxItem | null {
   return value ? Yes : No;
 }
 
-interface Props extends Omit<CheckBoxGroupProps, "items" | "selected"> {
+interface Props
+  extends Omit<CheckBoxGroupProps, "items" | "selected" | "onClick"> {
   value?: boolean | null;
+  onClick?(value: boolean): void;
 }
 
-const YesNoCheckboxes: FC<Props> = ({ value, ...rest }) => (
+const YesNoCheckboxes: FC<Props> = ({ value, onClick, ...rest }) => (
   <CheckBoxGroup
     items={[Yes, No]}
     selected={getSelectedItem(value)}
+    onClick={option => onClick && onClick(option === Yes)}
     {...rest}
   />
 );

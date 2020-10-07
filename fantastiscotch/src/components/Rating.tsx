@@ -1,32 +1,58 @@
-import React, { FC } from "react";
+import React, { FC, FormEvent, useCallback } from "react";
 import styled from "styled-components/macro";
 import Row from "./Row";
 import Button from "./Button";
 import { star, starFilled } from "../icons";
 import noop from "../utils/noop";
 import { RatingValue } from "../types/RatingValue";
+import Label from "./Label";
 
-const values = [1, 2, 3, 4, 5];
+const values: ReadonlyArray<RatingValue> = [1, 2, 3, 4, 5];
 
 interface RatingProps {
   selected?: RatingValue;
   onClick?(value: RatingValue): void;
+  label?: string;
 }
 
-const Rating: FC<RatingProps> = ({ selected = 0, onClick = noop, ...rest }) => (
-  <Root {...rest}>
-    {values.map(value => (
-      <RatingButton key={value}>
-        {value === selected ? <StarSelected /> : <StarUnselected />}
-        <StarHover />
-      </RatingButton>
-    ))}
-  </Root>
-);
+const Rating: FC<RatingProps> = ({
+  label = "Rating",
+  selected = 0,
+  onClick = noop,
+  ...rest
+}) => {
+  const handleClick = useCallback(
+    (event: FormEvent, value: RatingValue) => {
+      event.preventDefault();
+      if (onClick) {
+        onClick(value);
+      }
+    },
+    [onClick]
+  );
+  return (
+    <Root {...rest}>
+      <Label>{label}:</Label>
+      <StarContainer>
+        {values.map(value => (
+          <RatingButton key={value} onClick={e => handleClick(e, value)}>
+            {value === selected ? <StarSelected /> : <StarUnselected />}
+            <StarHover />
+          </RatingButton>
+        ))}
+      </StarContainer>
+    </Root>
+  );
+};
 
 export default styled(Rating)``;
 
 const Root = styled(Row)`
+  width: 100%;
+  align-items: center;
+`;
+
+const StarContainer = styled(Row)`
   width: 100%;
   justify-content: space-between;
 `;

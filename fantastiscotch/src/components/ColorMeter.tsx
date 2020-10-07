@@ -1,6 +1,5 @@
 import React, { FC, useCallback, useMemo } from "react";
 import styled from "styled-components/macro";
-import { bgLighest } from "../constants/colorTheme";
 import scotchColors from "../constants/scotchColors";
 import ScotchColor from "../types/ScotchColor";
 import Meter, {

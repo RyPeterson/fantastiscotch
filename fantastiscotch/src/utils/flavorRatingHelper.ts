@@ -20,6 +20,7 @@ type EntryValues = Pick<
   | "spicyRating"
   | "darkFruitRating"
 >;
+
 const valueMapper: Record<string, FlavorNames> = {
   acidicRating: FlavorNames.acidic,
   balanceRating: FlavorNames.balance,
@@ -38,7 +39,7 @@ const valueMapper: Record<string, FlavorNames> = {
   toffeeRating: FlavorNames.toffee
 };
 
-export default function getFlavorRatings(
+export function getFlavorRatings(
   values: EntryValues
 ): ReadonlyArray<FlavorRating> {
   return Object.entries(values)
@@ -53,4 +54,14 @@ export default function getFlavorRatings(
       return null;
     })
     .filter((value): value is FlavorRating => value !== null);
+}
+
+export function nameToField(name: FlavorNames): string | null {
+  const entry = Object.entries(valueMapper).find(
+    ([_, value]) => value === name
+  );
+  if (entry) {
+    return entry[0];
+  }
+  return null;
 }

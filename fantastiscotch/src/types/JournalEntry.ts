@@ -6,7 +6,7 @@ export default interface JournalEntry {
   distiller: string;
   origin: string;
   age: NullableNumber;
-  price: string;
+  price: NullableNumber;
   date: string;
   rating: RatingValue;
   notes: string;
@@ -51,7 +51,7 @@ export const defaultEntry: JournalEntry = {
   notes: "",
   origin: "",
   peatRating: null,
-  price: "",
+  price: null,
   proof: null,
   rating: 0,
   reasonToNot: "",
